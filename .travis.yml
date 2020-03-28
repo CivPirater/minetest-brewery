@@ -1,5 +1,9 @@
 language: generic
-sudo: false
+dist: xenial
+os: 
+  - linux
+  - osx
+  - windows
 addons:
   apt:
     packages:
