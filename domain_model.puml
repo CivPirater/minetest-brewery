@@ -1,0 +1,64 @@
+@startuml Domain Model
+hide circle
+skinparam Linetype ortho
+skinparam IconPrivateColor Black
+skinparam IconPublicColor Black
+skinparam IconProtectedColor Black
+skinparam IconPrivateBackgroundColor Black
+skinparam ClassStereotypeFontStyle normal
+skinparam Shadowing false
+skinparam ClassFontStyle bold
+skinparam class {
+    BackgroundColor #7ACFF5
+    ArrowColor Black
+    BorderColor Black
+}
+
+class "Ingredient" as ING {
+    - String name
+    - color
+}
+
+class "Drink" as DRINK {
+    - int alcohol_percentage
+    - int bacterial_percentage
+    - Timestamp time_spent_on_barrel
+    - Timestamp time_spent_on_fermenter
+    - String label
+    - drink()
+}
+
+class "Distilery" as DISTILERY {
+    - int MAX_TEMPERATURE
+    - int MIN_TEMPERATURE
+    - int curr_temperature
+}
+
+class "Barrel" as BARREL {
+    - Timestamp sealed_start_date
+    - Timestamp sealed_end_date
+    - seal()
+    - unseal()
+}
+
+class "Fermenter" as FERMENTER {
+}
+
+class "Crusher" as CRUSHER {
+
+}
+
+class "Bottler" as BOTTLER {
+    - craftBottles()
+    - label()
+}
+
+ING "*" <-- "1..*" CRUSHER : is crushed by >
+
+DRINK "1" --> "1..*" ING : is made out of >
+DRINK "*" <-- "1..*" DISTILERY : is distiled by >
+DRINK "*" <-- "1..*" BARREL : is aged by >
+DRINK "*" <-right- "1..*" FERMENTER : is fermented by >
+DRINK "*" <-- "*" BOTTLER : is bottled and labeled by >
+
+@enduml

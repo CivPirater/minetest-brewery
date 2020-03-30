@@ -1,59 +1,32 @@
-local timer = 0
-local minutes = 15;
+-- Crafting Mod - Brewing in Minetest
+-- Copyright (C) 2020
+--
+-- This library is free software; you can redistribute it and/or
+-- modify it under the terms of the GNU Lesser General Public
+-- License as published by the Free Software Foundation; either
+-- version 2.1 of the License, or (at your option) any later version.
+--
+-- This library is distributed in the hope that it will be useful,
+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+-- Lesser General Public License for more details.
+--
+-- You should have received a copy of the GNU Lesser General Public
+-- License along with this library; if not, write to the Free Software
+-- Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-print("Brewery Mod Alpha")
+minetest.debug("Brewery Initialized")
 
-minetest.register_node("brewery:barrel", {
-	description = "Barrel",
-	tiles = {
-		"barrel2.png",
-		"barrel1.png",
-		"barrel1.png",
-		"barrel1.png",
-		"barrel1.png",
-		"barrel1.png"
-	},
-	groups = { choppy=3 },
-	
-	--Creates an inventory for the barrel.
-	on_construct = function(pos)
-		local meta = minetest.get_meta(pos)
-		meta:set_string("formspec", [[
-		  size[8,9]
-		  list[context;main;2.5,1;3,3;]
-		  list[current_player;main;0,5;8,4;]"
-		  ]])
-		local inv = meta:get_inventory()
-		inv:set_size("main", 32)
-	end,
+local function get_all_items_in_group(grouptag) 
+    minetest.debug("Logging all food tagged items: ")
+    for name, def in pairs(minetest.registered_items) do
+        for groupname in pairs(def.groups) do
+            if string.find(groupname, grouptag) then
+                minetest.debug(name .. " is in group: " .. groupname)
+            end
+        end
+    end
+    minetest.debug("End of all tagged items.")
+end
 
-})
-
-minetest.chat_send_all("brewery")
-
-minetest.register_craft({
-	type = "shaped",
-	output = "brewery:barrel",
-	recipe = {
-		{"stairs:stair_wood", "default:wood", "stairs:stair_wood"},
-		{"stairs:stair_wood", "default:wood", "stairs:stair_wood"},
-		{"stairs:stair_wood", "default:wood", "stairs:stair_wood"}
-	}
-})
-
---drink template
-minetest.register_craftitem("brewery:vodka", {
-	age = 0,
-	maximumAge = 10,
-	description = "Vodka",
-	inventory_image = "vodka.png",
-	on_use = minetest.item(20, nil),
-})
-
-minetest.register_globalstep(function(dtime)
-	timer = timer + dtime;
-	if timer >= (60*minutes) then
-		--add to age here, age+=1
-		timer = 0
-	end
-end)
+minetest.debug(get_all_items_in_group("food"))
