@@ -4,6 +4,13 @@ This repo is the main home of the Brewery Mod for the Minetest game.
 
 If you need anything contact Pirater or Metriximor as the main maintainers of the project.
 
+## Ideas
+
+|Idea|Status|
+|:---:|:---:|
+|Medicinal Alcohol| Not started|
+|Desinfectant|Not started|
+
 ## License
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
