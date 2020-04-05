@@ -15,21 +15,71 @@
 -- License along with this library; if not, write to the Free Software
 -- Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-brewery.fermenter = {}
-local fermenter = brewery.fermenter
+fermenter = {}
 fermenter.start_date = nil
 fermenter.end_date = nil
 fermenter.yeast = nil
 
 function fermenter.calculate_yeast_concentration(time_dif, yeast)
-    if(yeast == nil) then
-        error("No yeast passed")
-    elseif(yeast.growth_rate == nil or yeast.lag_phase_duration == nil 
-    or yeast.death_rate == nil or yeast.yeast.stationary_phase == nil) then
-        error("Yeast can't have nil values")
-    elseif(time_dif > 0) then
-        error("Difference in time can't be equal or smaller than 0")
-    end
-    return 1/(1+e^(-a(time_dif-b)))+1/(1+e^(c(time_dif-d)))-1
+	if (yeast == nil) then
+		error("No yeast passed")
+	elseif
+		(yeast.growth_rate == nil or yeast.lag_phase_duration == nil or yeast.death_rate == nil or
+			yeast.yeast.stationary_phase == nil)
+	 then
+		error("Yeast can't have nil values")
+	elseif (time_dif > 0) then
+		error("Difference in time can't be equal or smaller than 0")
+	end
+	return 1 / (1 + math.exp(1) ^ (-yeast.growth_rate * (time_dif - yeast.lag_phase_duration))) +
+		1 / (1 + math.exp(1) ^ (yeast.death_rate * (time_dif - yeast.stationary_phase))) -
+		1
 end
 
+function fermenter.calculate_alcohol_quantity(time_dif, yeast)
+	if (yeast == nil) then
+		error("No yeast passed")
+	elseif
+		(yeast.growth_rate == nil or yeast.lag_phase_duration == nil or yeast.death_rate == nil or
+			yeast.yeast.stationary_phase == nil)
+	 then
+		error("Yeast can't have nil values")
+	elseif (time_dif > 0) then
+		error("Difference in time can't be equal or smaller than 0")
+	end
+	return -math.log(math.exp(1) ^ (yeast.death_rate * yeast.stationary_phase - yeast.death_rate * time_dif) + 1) /
+		yeast.death_rate +
+		math.log(
+			math.exp(1) ^ (yeast.growth_rate * time_dif) + math.exp(1) ^ (yeast.growth_rate * yeast.lag_phase_duration)
+		) /
+			yeast.growth_rate -
+		time_dif +
+		(yeast.stationary_phase - yeast.lag_phase_duration)
+end
+
+function fermenter.calculate_alcohol_percentage(time_dif, yeast)
+	if (yeast == nil) then
+		error("No yeast passed")
+	elseif
+		(yeast.growth_rate == nil or yeast.lag_phase_duration == nil or yeast.death_rate == nil or
+			yeast.yeast.stationary_phase == nil)
+	 then
+		error("Yeast can't have nil values")
+	elseif (time_dif > 0) then
+		error("Difference in time can't be equal or smaller than 0")
+	end
+	return (-math.log(
+		math.exp(1) ^ (yeast.death_rate * yeast.stationary_phase - yeast.death_rate * time_dif) + 1
+	) /
+		yeast.death_rate +
+		math.log(
+			math.exp(1) ^ (yeast.growth_rate * time_dif) + math.exp(1) ^ (yeast.growth_rate * yeast.lag_phase_duration)
+		) /
+			yeast.growth_rate -
+		time_dif +
+		(yeast.stationary_phase - yeast.lag_phase_duration)) /
+		(yeast.stationary_phase - yeast.lag_phase_duration)
+end
+
+function fermenter.register_fermenter()
+end

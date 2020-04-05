@@ -31,7 +31,7 @@ function brewery.get_all_items_in_group(grouptag)
     minetest.debug("End of all tagged items.")
 end
 
-minetest.debug(get_all_items_in_group("food"))
+minetest.debug(brewery.get_all_items_in_group("food"))
 
 local modpath = minetest.get_modpath("brewery")
 

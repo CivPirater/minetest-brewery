@@ -34,7 +34,7 @@ The function of the concentration of microorganisms is:
 
 ![1/(1+e^(-a(x-b)))+1/(1+e^(c(x-d)))-1](/wiki/microorganism_growth_function.png)
 
-The function for the percentage of alcohol is:
+The function for the quantity of alcohol is:
 
 ![-ln(e^(c*d-c*x)+1)/c+ln(e^(a*x)+e^(a*b))/a-x+(d-b))](/wiki/alcohol_percentage_function.png)
 
