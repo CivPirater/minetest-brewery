@@ -1,10 +1,11 @@
 @startuml Domain Model
 hide circle
-skinparam Linetype ortho
+hide empty
 skinparam IconPrivateColor Black
 skinparam IconPublicColor Black
 skinparam IconProtectedColor Black
 skinparam IconPrivateBackgroundColor Black
+skinparam IconPublicBackgroundColor #7ACFF5
 skinparam ClassStereotypeFontStyle normal
 skinparam Shadowing false
 skinparam ClassFontStyle bold
@@ -20,8 +21,9 @@ class "Ingredient" as ING {
 }
 
 class "Drink" as DRINK {
+    - int yeast_concentration
     - int alcohol_percentage
-    - int bacterial_percentage
+    - int alcohol_quantity
     - Timestamp time_spent_on_barrel
     - Timestamp time_spent_on_fermenter
     - String label
@@ -37,11 +39,25 @@ class "Distilery" as DISTILERY {
 class "Barrel" as BARREL {
     - Timestamp sealed_start_date
     - Timestamp sealed_end_date
+    - ItemStack trace_amounts_of
     - seal()
     - unseal()
 }
 
 class "Fermenter" as FERMENTER {
+    - Timestamp time_start
+    - Timestamp time_end
+    + calculateYeastConcentration()
+    + calculateAlcoholPercentage()
+    + calculateAlcoholQuantity()
+}
+
+class "Yeast" as YEAST {
+    - double growth_rate
+    - double lag_phase_duration
+    - double death_rate
+    - double stationary_phase
+    + generateYeast(humidity, temperature, position)
 }
 
 class "Crusher" as CRUSHER {
@@ -53,12 +69,22 @@ class "Bottler" as BOTTLER {
     - label()
 }
 
-ING "*" <-- "1..*" CRUSHER : is crushed by >
+class "Brew Kettle" as KETTLE {
+    - int temperature
+    - Timestamp started_boiling
+    - Timestamp stopped_boiling
+    - boil()
+}
 
-DRINK "1" --> "1..*" ING : is made out of >
-DRINK "*" <-- "1..*" DISTILERY : is distiled by >
-DRINK "*" <-- "1..*" BARREL : is aged by >
-DRINK "*" <-right- "1..*" FERMENTER : is fermented by >
-DRINK "*" <-- "*" BOTTLER : is bottled and labeled by >
+ING "1" -- "1..*" CRUSHER : is crushed by >
+ING "1..*" -- "1" KETTLE : is brewed by >
+
+DRINK "1" -- "1..*" KETTLE : is made in a >
+DRINK "1" -- "1..*" DISTILERY : is distiled by >
+DRINK "1" -- "1..*" BARREL : is aged by >
+DRINK "1" -- "1..*" FERMENTER : is fermented by >
+DRINK "1" -- "1" BOTTLER : is bottled \nand labeled by >
+
+FERMENTER "*" -- "1" YEAST : uses >
 
 @enduml

@@ -40,7 +40,7 @@ The function for the percentage of alcohol is:
 
 Where:
 
-* x is the time that has passed.
+* x is the time that has passed. *(in minutes)*
 * a is the growth rate for the exponential phase.
   * is between 2 and 7
 * b is the duration of the lag phase
@@ -54,6 +54,21 @@ The variables a, b, c and d depend on the used microorganism.
 Microorganisms depend on a variety of environmental factors such as humidity, temperature and geographical location.
 
 In theory, the perfect microorganism would have a positive infinite a,c and d values(a for instanteous growth, c for instantaneous death and d for infinite stationary phase) and a 0 b(for no lag phase).
+
+### Barrel
+
+Barrel aging is extremely important. It is barrel aging that allows a beverage to mature and grow it's flavor so that it's not dry.
+
+### LONKS
+
+<https://www.masterclass.com/articles/wine-101-what-is-barrel-aging-understanding-the-barrel-aging-process-in-winemaking-and-the-difference-between-steel-and-oak-barrels#what-do-wines-aged-in-new-oak-taste-like>
+
+<https://guide.michelin.com/en/article/dining-out/5-things-you-need-to-know-about-barrel-aging>
+
+<https://en.wikipedia.org/wiki/Aging_of_wine>
+
+<https://www.shakestir.com/features/id/551/science-of-barrel-agingScience>
+
 ## License
 
 This program is free software; you can redistribute it and/or

@@ -6,13 +6,37 @@ globals = {
 }
 
 read_globals = {
-    string = {fields = {"split"}},
-    table = {fields = {"copy", "getn"}},
+	"DIR_DELIM",
+	"minetest", "core",
+	"dump", "dump2",
+	"vector",
+	"VoxelManip", "VoxelArea",
+	"PseudoRandom", "PcgRandom",
+	"ItemStack",
+	"Settings",
+	"unpack",
 
-    -- Builtin
-    "vector", "ItemStack",
-    "dump", "DIR_DELIM", "VoxelArea", "Settings",
+	table = {
+		fields = {
+			"copy",
+			"indexof",
+			"insert_all",
+			"key_value_swap",
+		}
+	},
 
-    -- MTG
-    "default", "sfinv", "creative",
+	string = {
+		fields = {
+			"split",
+			"trim",
+		}
+	},
+
+	math = {
+		fields = {
+			"hypot",
+			"sign",
+			"factorial"
+		}
+	},
 }

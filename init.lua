@@ -19,7 +19,7 @@ minetest.debug("Brewery Initialized")
 
 brewery = {}
 
-local function get_all_items_in_group(grouptag)
+function brewery.get_all_items_in_group(grouptag)
     minetest.debug("Logging all food tagged items: ")
     for name, def in pairs(minetest.registered_items) do
         for groupname in pairs(def.groups) do
@@ -37,3 +37,5 @@ local modpath = minetest.get_modpath("brewery")
 
 -- Load files
 dofile(modpath .. "/Barrel.lua")
+dofile(modpath .. "/Yeast.lua")
+dofile(modpath .. "/Fermenter.lua")
