@@ -15,19 +15,19 @@
 -- License along with this library; if not, write to the Free Software
 -- Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-brewery.barrel = {
+barrel = {
     sealed_start_date = nil,
     sealed_end_date = nil
 }
 
 -- Returns: the OS date time
-local function get_current_time()
+function barrel.get_current_time()
     return os.date("*t")
 end
 
 -- Calculates the difference between dates that the system was sealed
 -- Returns: The difference or nil (if it wasn't sealed)
-function brewery.barrel.time_sealed(start_sealed_time, end_sealed_time)
+function barrel.time_sealed(start_sealed_time, end_sealed_time)
     if barrel.is_sealed() then
         return os.difftime(start_sealed_time, end_sealed_time)
     else
@@ -36,10 +36,10 @@ function brewery.barrel.time_sealed(start_sealed_time, end_sealed_time)
 end
 
 -- Returns true if barrel is sealed and false if barrel is not sealed
-function brewery.barrel.is_sealed()
+function barrel.is_sealed()
 end
 
-function brewery.barrel.get_formspec(pos)
+function barrel.get_formspec(pos)
 	local spos = pos.x .. "," .. pos.y .. "," .. pos.z
 	local formspec =
 		"size[8,9]" ..
@@ -69,7 +69,7 @@ minetest.register_node(
             {"", "group:wood", ""}
         },
         on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
-            minetest.show_formspec(clicker:get_player_name(), "brewery:barrelformspec", brewery.barrel.get_formspec(pos))
+            minetest.show_formspec(clicker:get_player_name(), "brewery:barrelformspec", barrel.get_formspec(pos))
         end
     }
 )

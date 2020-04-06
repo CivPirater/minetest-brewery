@@ -8,8 +8,9 @@ addons:
     packages:
     - luarocks
 before_install:
-  - luarocks install --local luacheck
+  - luarocks install --local luacheck && luarocks install --local busted
 script:
 - $HOME/.luarocks/bin/luacheck .
+- $HOME/.luarocks/bin/busted .
 notifications:
   email: false
