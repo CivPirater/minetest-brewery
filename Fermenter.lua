@@ -16,9 +16,6 @@
 -- Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 fermenter = {}
-fermenter.start_date = nil
-fermenter.end_date = nil
-fermenter.yeast = nil
 
 function fermenter.calculate_yeast_concentration(time_dif, yeast)
 	if (yeast == nil) then

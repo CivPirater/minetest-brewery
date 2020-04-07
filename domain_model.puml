@@ -40,6 +40,7 @@ class "Barrel" as BARREL {
     - Timestamp sealed_start_date
     - Timestamp sealed_end_date
     - ItemStack trace_amounts_of
+    - int capacity_mb
     - seal()
     - unseal()
 }

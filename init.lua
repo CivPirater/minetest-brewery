@@ -31,6 +31,10 @@ function brewery.get_all_items_in_group(grouptag)
     minetest.debug("End of all tagged items.")
 end
 
+function brewery.get_brewery()
+    return brewery
+end
+
 minetest.debug(brewery.get_all_items_in_group("food"))
 
 local modpath = minetest.get_modpath("brewery")
@@ -39,3 +43,4 @@ local modpath = minetest.get_modpath("brewery")
 dofile(modpath .. "/Barrel.lua")
 dofile(modpath .. "/Yeast.lua")
 dofile(modpath .. "/Fermenter.lua")
+dofile(modpath .. "/Drink.lua")
