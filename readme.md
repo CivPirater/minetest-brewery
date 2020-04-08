@@ -53,7 +53,8 @@ Where:
 The variables a, b, c and d depend on the used microorganism.
 Microorganisms depend on a variety of environmental factors such as humidity, temperature and geographical location.
 
-In theory, the perfect microorganism would have a positive infinite a,c and d values(a for instanteous growth, c for instantaneous death and d for infinite stationary phase) and a 0 b(for no lag phase).
+In theory, the perfect microorganism would have a positive infinite a,c and d values(a for instanteous growth, c for instantaneous death) and a 0 b(for no lag phase).
+The value d depends entirely of the quantity of sugar present in the beverage.(e.g. If there's )
 
 ### Barrel
 
