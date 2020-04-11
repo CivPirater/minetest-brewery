@@ -45,3 +45,16 @@ end
 function utils.get_current_time()
 	return os.date("*t")
 end
+
+--Checks if a given meta data contains a string, and if it doesn't
+--it return's the alternative string
+--@params meta          - the metadata of the node/item
+--@params meta_string   - the value to look for inside the metadata
+--@params alternative   - the alternative string to write
+function utils.meta_string_alt(meta, meta_string, alternative)
+    assert(meta, "meta can't be null")
+    assert(alternative,"alternative can't be null")
+    local string = meta:get_string(meta_string)
+    if string == "" then return alternative
+    else return string end
+end
