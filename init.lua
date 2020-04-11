@@ -15,9 +15,16 @@
 -- License along with this library; if not, write to the Free Software
 -- Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
+--TODO: require SFINV, bucket mod
 minetest.debug("Brewery Initialized")
 
 brewery = {}
+brewery.drink = {}
+brewery.barrel = {}
+brewery.fermenter = {}
+brewery.ingredient = {}
+brewery.yeast = {}
+brewery.utils = {}
 
 function brewery.get_all_items_in_group(grouptag)
     minetest.debug("Logging all food tagged items: ")
@@ -40,7 +47,8 @@ minetest.debug(brewery.get_all_items_in_group("food"))
 local modpath = minetest.get_modpath("brewery")
 
 -- Load files
+dofile(modpath .. "/Drink.lua")
+dofile(modpath .. "/Utils.lua")
 dofile(modpath .. "/Barrel.lua")
 dofile(modpath .. "/Yeast.lua")
 dofile(modpath .. "/Fermenter.lua")
-dofile(modpath .. "/Drink.lua")

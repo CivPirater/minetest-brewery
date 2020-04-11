@@ -15,20 +15,25 @@
 -- License along with this library; if not, write to the Free Software
 -- Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-local drink = {}
+--Drink is the fundamental item in Brewery, it's purpose is to accrue enough metadata to
+--eventually be bottled.
+--Metadata attributes:
+--  palette_index: a int from 0 to 255
+--  palette: a texture file set on load
+--  description: the name of the drink
+drink = brewery.drink
 
+--Sets the color of the drink
+--@color - an int value from 0 to 255
 function drink.set_color(meta, color)
     assert(meta, "Meta can't be null")
-    assert(
-        color.type == "number" and color >= 0 and color <= 255,
-        "Number can only be an integer between 0 and 255"
-    )
+    assert(color >= 0 and color <= 255, "Number can only be an integer between 0 and 255")
     meta:set_int("palette_index", color)
     meta:set_string("description", "Drink (color #" .. color .. ")")
 end
 
 minetest.register_craftitem(
-    "brewery:drink",
+    "brewery:bucket_drink",
     {
         description = "Drink",
         inventory_overlay = "brewery_bucket.png",
@@ -41,6 +46,20 @@ minetest.register_craftitem(
         end
     }
 )
+
+--Checks if a drink is the same as the other
+--@meta1 - the meta of a drink
+--@meta2 - the meta of the drink we want to compare it with
+--@returns true if it is the same(check Drink.lua)
+--         false if it isn't equal
+function drink.equals(meta1, meta2)
+    assert(meta1, "meta of the first drink can't be nil")
+    assert(meta2, "meta of what we want to compare to can't be nil")
+    if meta1 == meta2 then return true end
+    if meta1:get_int("palette_index") ~= meta2:get_int("palette_index") then return false end
+
+    return true
+end
 
 --Temp function for testing
 function drink.change_color(itemstack)

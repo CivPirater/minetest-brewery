@@ -16,6 +16,7 @@ read_globals = {
 	"Settings",
 	"unpack",
 	"sfinv",
+	"brewery",
 
 	table = {
 		fields = {
