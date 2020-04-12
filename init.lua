@@ -47,8 +47,8 @@ minetest.debug(brewery.get_all_items_in_group("food"))
 local modpath = minetest.get_modpath("brewery")
 
 -- Load files
-dofile(modpath .. "/Drink.lua")
 dofile(modpath .. "/Utils.lua")
-dofile(modpath .. "/Barrel.lua")
+dofile(modpath .. "/Drink.lua")
 dofile(modpath .. "/Yeast.lua")
+dofile(modpath .. "/Barrel.lua")
 dofile(modpath .. "/Fermenter.lua")
