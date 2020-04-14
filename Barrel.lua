@@ -406,13 +406,32 @@ minetest.register_node(
 	"brewery:barrel",
 	{
 		description = "Small Barrel", --TODO: make this a variable
-		inventory_image = "barrel1.png", --TODO: make this a variable
-		wield_image = "barrel1.png", --TODO: make this a variable
+		sounds = default.node_sound_wood_defaults(),
+		drawtype = "mesh",
+		mesh = "brewery_barrel.obj",
+		tiles = {"brewery_barrel.png"},
+		paramtype = "light",
+		paramtype2 = "wallmounted",
+		collision_box = {
+			type = "fixed",
+			fixed = {
+				{-0.25, -0.5, -0.25, 0.25, 0.5, 0.25}, -- Center box
+				{-0.0625, -0.5, -0.375, 0.0625, 0.5, 0.375}, -- NodeBox11
+				{-0.375, -0.5, -0.0625, 0.375, 0.5, 0.0625} -- NodeBox12
+			}
+		},
+		selection_box = {
+			type = "fixed",
+			fixed = {
+				{-0.5, -0.52, -0.5, 0.5, 0.52, 0.5}
+			}
+		},
 		groups = {
 			--TODO: make this a variable
 			choppy = 2,
 			oddly_breakable_by_hand = 2,
-			flammable = 3
+			flammable = 3,
+			falling_node = 1
 		},
 		recipe = {
 			--TODO: rework the entire crafting process

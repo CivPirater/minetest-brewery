@@ -15,7 +15,7 @@ read_globals = {
 	"ItemStack",
 	"Settings",
 	"unpack",
-	"sfinv",
+	"sfinv", "default",
 	"brewery","ItemStack",
 
 	table = {
